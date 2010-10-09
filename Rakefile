@@ -10,6 +10,7 @@ begin
     gem.homepage = "http://github.com/stephenaument/bwi-base"
     gem.authors = ["Stephen Aument"]
     gem.add_development_dependency "shoulda", ">= 0"
+    gem.add_dependency "cancan"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

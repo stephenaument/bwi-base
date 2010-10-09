@@ -15,6 +15,34 @@ module ActionView
   end
 end
 
+module ApplicationHelper
+  def title(page_title, show_title = true)
+    content_for :title, page_title.to_s
+    @show_title = show_title
+  end
+
+  def show_title?
+    @show_title
+  end
+
+  def stylesheet(*args)
+    content_for(:head) { stylesheet_link_tag(*args) }
+  end
+
+  def javascript(*args)
+    content_for(:head) { javascript_include_tag(*args) }
+  end
+
+  def menu_item(klass, opts = {})
+    if can? :manage, klass
+      html = ''
+      html += ' | ' if !opts[:first]
+      opts[:label] ||= klass.to_s.tableize.humanize.titleize
+      html += link_to(opts[:label],eval("#{klass.to_s.tableize}_path"))
+    end
+  end
+end
+
 module BWI
   module Array
     module InstanceMethods
