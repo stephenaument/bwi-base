@@ -126,6 +126,15 @@ module BWI
   end
 end
 
+
+module ActionController #:nodoc:
+  class Base
+    def bwi_respond_with(*resources, &block)
+      respond_with(*resources, :methods => :pkid, &block)
+    end
+  end
+end
+
 class Time;include BWI::Time;end
 class ActiveRecord::Base;include BWI::ActiveRecord::Base;end
 class Array;include BWI::Array;end
