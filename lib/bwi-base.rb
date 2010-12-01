@@ -43,6 +43,27 @@ module ApplicationHelper
   end
 end
 
+
+# Will Paginate extensions
+module BWI
+  module WillPaginate
+    module Collection
+      module InstanceMethods
+        def to_json(options = {})
+          super({:total_pages => read_attribute(:total_pages), :total_entries => read_attribute(:total_entries)})
+        end
+      end
+      
+      def self.included(receiver)
+        receiver.send :include, InstanceMethods
+      end
+    end
+  end
+end
+
+class WillPaginate::Collection; include BWI::WillPaginate; end
+
+
 module BWI
   module Array
     module InstanceMethods
