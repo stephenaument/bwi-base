@@ -1,3 +1,5 @@
+require 'factories_to_json_files'
+
 module ActiveRecord
   class Base
     alias_attribute :pkid, :id

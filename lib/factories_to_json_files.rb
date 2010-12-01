@@ -21,6 +21,7 @@ module BWI
           File.open(File.join('.','spec','factories',"#{name}.json"), mode="w") do |file|
             file << JSON.pretty_generate(JSON.parse(obj.to_json))
           end
+          User.where("email like 'person%@example.com'").destroy_all
         rescue
           puts "Error while processing factory #{name}: #{$!}"
         end
