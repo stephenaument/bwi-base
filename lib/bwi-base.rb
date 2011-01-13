@@ -153,7 +153,22 @@ end
 module ActionController #:nodoc:
   class Base
     def bwi_respond_with(*resources, &block)
-      respond_with(*resources, :methods => :pkid, &block)
+      options = {}
+      methods = [:pkid]
+
+      options = resources.pop if resources.size > 1 && resources.last.is_a?(Hash)
+
+      if options[:methods]
+        if options[:methods].is_a?(Array)
+          methods = methods + options[:methods]
+        else
+          methods = methods << options[:methods]
+        end
+      end
+      
+      options[:methods] = methods
+        
+      respond_with(*resources, options, &block)
     end
   end
 end
