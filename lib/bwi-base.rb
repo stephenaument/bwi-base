@@ -168,7 +168,7 @@ module ActionController #:nodoc:
       
       options[:methods] = methods
         
-      respond_with(*resources, options, &block)
+      respond_with(resources, options, &block)
     end
   end
 end
